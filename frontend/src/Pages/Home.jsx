@@ -1,16 +1,16 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie'; // Import the js-cookie library
-
+import { useLocation } from 'react-router-dom';
 
 function Home() {
     const location = useLocation(); 
 
+    // Check if location.state and location.state.id exist before accessing id
+    const userId = location.state && location.state.id ? location.state.id : null;
 
     return (
         <div className=''>
-            {location.state.id ? (
-                <h1 className='text-blue-500 font-bold text-5xl p-20 text-center'>Welcome {location.state.id}</h1>
+            {userId ? (
+                <h1 className='text-blue-500 font-bold text-5xl p-20 text-center'>Welcome {userId}</h1>
             ) : (
                 <h1 className='text-red-500 font-bold text-5xl p-20 text-center'>Not logged in</h1>
             )}
@@ -19,7 +19,6 @@ function Home() {
             </div>
         </div>
     );
-    
 }
 
 export default Home;

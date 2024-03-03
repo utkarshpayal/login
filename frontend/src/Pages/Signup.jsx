@@ -19,7 +19,7 @@ function Signup() {
                     if(res.data == 'exists'){
                         alert('User already exists')
                     }else if(res.data =='notexists'){
-                        history("/home",{state:{id:email}})                    }
+                        history("/",{state:{id:email}})                    }
                 })
                 .catch(e =>{
                 alert('wrong details')
