@@ -40,7 +40,7 @@ function Signup() {
   <form className='border border-black rounded-b-xl p-4 flex flex-col items-center' action='POST'>
     <input className='rounded border p-2 mb-4 w-64' type='email' onChange={(e) => {setEmail(e.target.value)}} placeholder='Enter Email'/>
     <input className='rounded border p-2 mb-4 w-64' type='password' onChange={(e) => {setPassword(e.target.value)}} placeholder='Enter Password'/>
-    <button className='bg-red-400 text-white px-4 py-2 rounded' type='submit' onClick={submit}>Submit</button>
+    <button className='bg-red-400 text-white px-4 py-2 rounded hover:bg-red-600' type='submit' onClick={submit}>Submit</button>
   </form>
   <p className="text-center mt-4">OR</p>
   <div className="text-center">

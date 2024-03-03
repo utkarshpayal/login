@@ -1,5 +1,4 @@
 
-    // import express from 'express';
 
     const express = require('express')
     const collection = require('./mongo')
@@ -15,22 +14,26 @@
 
     })
 
-    app.post('/',async(req, res) => {
-        const{email, password}= req.body
+    app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
 
-        try{
-            const check = await collection.findOne({email:email}) 
-            if(check){
-                res.json('exists')
+    try {
+        const user = await collection.findOne({ email: email });
+        if (user) {
+            if (user.password === password) {
+                res.json('success');
+            } else {
+                res.json('incorrect_password' );
             }
-            else{
-                res.json('notexists')
-            }
+        } else {
+            res.json('user_not_exists');
         }
-        catch(e){
-            res.json('notexists')
-        }
-    })
+    } catch (e) {
+        console.error('Error:', e);
+        res.status(500).json({ message: 'server_error' });
+    }
+});
+
 
 
 

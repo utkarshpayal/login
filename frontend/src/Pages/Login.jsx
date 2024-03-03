@@ -14,16 +14,19 @@ function Login() {
     async function submit(e){
         e.preventDefault();
         try{
-                await axios.post('http://localhost:5000/',{
+                await axios.post('http://localhost:5000/login',{
                 email, password })
                 .then(res => {
-                    if(res.data == 'exists'){
+                    if(res.data == 'success'){
                         Cookies.set('email', email); // Store email in a cookie
                         history("/home",{state:{id:email}})
 
-                    }else if(res.data == 'notexists'){
+                    }else if(res.data == 'user_not_exists'){
                         alert('User has not signed up')
                     }
+                    else if(res.data == 'incorrect_password'){
+                      alert('Please enter correct password')
+                  }
                 })
                 .catch(e =>{
                 alert('wrong details')
