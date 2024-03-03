@@ -8,7 +8,7 @@ function Navbar() {
       <nav>
         <ul className='bg-blue-400 flex justify-between items-center h-20 px-10 rounded-xl text-xl'>
           <li>
-            <Link to="/home" className='text-white font-bold hover:text-red-400'>Home</Link>
+            <Link to="/" className='text-white font-bold hover:text-red-400'>Home</Link>
           </li>
           <li>
             <Link to="/login" className='text-white font-bold hover:text-red-400'>Login</Link>

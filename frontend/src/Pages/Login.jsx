@@ -19,7 +19,7 @@ function Login() {
                 .then(res => {
                     if(res.data == 'success'){
                         Cookies.set('email', email); // Store email in a cookie
-                        history("/home",{state:{id:email}})
+                        history("/",{state:{id:email}})
 
                     }else if(res.data == 'user_not_exists'){
                         alert('User has not signed up')
