@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Home() {
-    const location = useLocation(); 
+    const location = useLocation();
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [userId, setUserId] = useState(sessionStorage.getItem('userId') || null);
 
-    // Check if location.state and location.state.id exist before accessing id
-    const userId = location.state && location.state.id ? location.state.id : null;
+    useEffect(() => {
+        // Check if session is stored in sessionStorage
+        const sessionStatus = sessionStorage.getItem('loggedIn');
+        if (sessionStatus === 'true' && userId) {
+            setLoggedIn(true);
+        }
+    }, [userId]);
+
+    useEffect(() => {
+        // Check if userId is stored in sessionStorage
+        if (!userId) {
+            const newUserId = location.state && location.state.id;
+            if (newUserId) {
+                setUserId(newUserId);
+                sessionStorage.setItem('userId', newUserId);
+            }
+        }
+    }, [location.state, userId]);
 
     return (
         <div className=''>
-            {userId ? (
-                <h1 className='text-blue-500 font-bold text-5xl p-20 text-center'>Welcome {userId}</h1>
+            {loggedIn ? (
+                <h1 className='text-blue-500 font-bold text-5xl p-20 text-center'>{userId} logged in</h1>
             ) : (
                 <h1 className='text-red-500 font-bold text-5xl p-20 text-center'>Not logged in</h1>
             )}
