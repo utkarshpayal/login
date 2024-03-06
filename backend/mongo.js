@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/login')
+mongoose.connect('mongodb://localhost:27017/login', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("MongoDB connected");
     })
@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost:27017/login')
         console.error("MongoDB connection error:", error);
     });
 
-const Schema = mongoose.Schema; // Correct method to create a new schema
+const Schema = mongoose.Schema;
 
 const newSchema = new Schema({
     email: {
@@ -18,9 +18,10 @@ const newSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    
 });
 
-const collection = mongoose.model('collection', newSchema);
+const CollectionModel = mongoose.model('Collection', newSchema);
 
-module.exports = collection; // Exporting the model, not the collection variable
+module.exports = CollectionModel;
